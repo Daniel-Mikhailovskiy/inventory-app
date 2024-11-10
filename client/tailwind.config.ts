@@ -26,6 +26,25 @@ const shadeMapping = {
   "900": "50",
 };
 
+const generateThemeObject3 = (colors: any, mapping: any, invert = false) => {
+  //Create an empty theme object
+  const theme: any = {};
+
+  //map over base colors to get a particular color from baseColors
+  baseColors.forEach((color: any) => {
+
+  // Create a nested object inside eaxh of the color 
+    theme[color] = {}
+
+  //Map over Tailwind colors to get ids of colors and assign them to the shades 
+    Object.entries(mapping).forEach(([key, value]) => {
+      const shade:any = invert ? key : value
+      theme[color][shade] = colors[color][shade]
+    })
+  })
+  return theme
+}
+
 const generateThemeObject = (colors: any, mapping: any, invert = false) => {
   const theme: any = {};
   baseColors.forEach((color) => {

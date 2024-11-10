@@ -5,9 +5,22 @@ import Image from "next/image";
 import Link from "next/link";
 import React from "react";
 
-type Props = {}
+import { useAppDispatch, useAppSelector } from "@/app/redux";
+import { setIsSidebarCollapsed } from "@/state";
 
-const Navbar = (props: Props) => {
+
+
+const Navbar = () => {
+    const dispatch = useAppDispatch();
+    const isSidebarCollapsed = useAppSelector(
+        (state) => state.global.isSidebarCollapsed
+    );
+
+    const toggleSidebar = () => {
+        dispatch(setIsSidebarCollapsed(!isSidebarCollapsed));
+    };
+
+
     return (
         <div className="flex justify-between items-center w-full mb-7">
 
@@ -15,7 +28,7 @@ const Navbar = (props: Props) => {
             <div className="flex justify-between items-center gap-5">
                 <button
                     className="px-3 py-3 bg-gray-100 rounded-full hover:bg-blue-100"
-                    onClick={() => { }}
+                    onClick={toggleSidebar}
                 >
                     <Menu className="w-4 h-4" />
                 </button>
@@ -49,7 +62,7 @@ const Navbar = (props: Props) => {
                     <hr className="w-0 h-7 border border-solid border-l border-gray-300 mx-3" />
                     <div className="flex items-center gap-3 cursor-pointer">
                         <div className="w-9 h-9">image</div>
-                        <span className="font-semibold">Ed Roh</span>
+                        <span className="font-semibold">Daniel Mikhailovskiy</span>
                     </div>
                 </div>
                 <Link href="/settings">
